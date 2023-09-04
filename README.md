@@ -19,3 +19,41 @@ Os requisitos são os seguintes:
 1. O sistema deve permitir o acesso remoto aos dados de usuários nos dispositivos terminais mediante autenticação externa de email ou o par usuário + senha.
 1. Aplicações Web podem usar ambos os mecanismos de autenticação (externa por email e par usuário+senha).
 1. Dispositivos terminais microcontrolados devem possuir teclado numérico aparente para o preenchimento de usuário e senha numéricos e, assim, aunteticar o usuário para realizar as operações na máquina local.
+
+## Arquitetura da solução
+
+Dois tipos de cliente: aplicação Web e sistema embarcado. A aplicação Web é baseada em REST API, uma vez que o sentido das mensagens é, basicamente, do cliente para o servidor. Já o sistema embarcado é uma via bidirecional, por isso o uso de MQTT.
+
+```mermaid
+flowchart LR
+    WebApp([Web App])
+    Embarcado([Embarcado])
+    subgraph Nuvem
+        subgraph Web
+            HTTPS(HTTPS)
+            WS(WebSocket)
+            Cadastro(Cadastro*)
+            Banco0(Banco*)
+        end
+        subgraph MQTT
+            Broker(Broker)
+            Banco1(Banco*)
+        end
+        BD[(BD)]
+    end
+
+    WebApp --- HTTPS
+    HTTPS --- Cadastro
+    HTTPS --- Banco0
+    Banco0 --- BD
+    Cadastro --- BD
+
+    Embarcado --- HTTPS
+    HTTPS --- WS
+    WS --- Broker
+    Broker --- Banco1
+    Banco1 --- BD
+
+    linkStyle 0,1,2,3,4 stroke:lightgreen
+    linkStyle 5,6,7,8,9 stroke:lightyellow
+```
