@@ -22,7 +22,7 @@ Os requisitos são os seguintes:
 
 ## Arquitetura da solução
 
-Dois tipos de cliente: aplicação Web e sistema embarcado. A aplicação Web é baseada em REST API, uma vez que o sentido das mensagens é, basicamente, do cliente para o servidor. Já o sistema embarcado é uma via bidirecional, por isso o uso de MQTT. Os blocos com asterisco (`*`) são aplicações a serem desenvolvidas ao longo do projeto.
+Dois tipos de cliente: aplicação Web e sistema embarcado. A aplicação Web é baseada em REST API + JSON, uma vez que o sentido das mensagens é, basicamente, do cliente para o servidor. Já o sistema embarcado é uma via bidirecional, por isso o uso de MQTT. Os blocos com asterisco (`*`) são aplicações a serem desenvolvidas ao longo do projeto.
 
 ```mermaid
 flowchart LR
