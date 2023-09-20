@@ -7,8 +7,7 @@ Parte da solução a rodar em nuvem.
 Os requisitos são os seguintes:
 
 1. O sistema deve possuir acesso a partir de qualquer endereço IPv4 ou IPv6.
-1. O sistema deve atender a requisições pela Internet de microcontrolados com limitada capacidade de processamento através do protocolo MQTT versões 3.1.1 e 5.
-1. O sistema deve atender a requisições pela Internet de dispositivos terminais com microprocessados com boa capacidade de processamento via padrões REST API e, assim como os dispositivos terminais microcontrolados, através do protocolo MQTT versões 3.1.1 e 5 via WebSocket.
+1. O sistema deve atender a requisições pela Internet via padrões REST API sobre HTTPS.
 1. O sistema deve prever uma interface de usuário para cadastro e manutenção da sua conta.
 1. O cadastro de usuário deve ser feito com mecanismo externo de validação de email, como por exemplo [OAuth](https://oauth.net/2/), e posterior preenchimento dos demais dados, como por exemplo apelido e senha.
 1. O sistema deve ter suporte a escalabilidade para atender a picos momentâneos de demanda.
@@ -22,38 +21,30 @@ Os requisitos são os seguintes:
 
 ## Arquitetura da solução
 
-Dois tipos de cliente: aplicação Web e sistema embarcado. A aplicação Web é baseada em REST API + JSON, uma vez que o sentido das mensagens é, basicamente, do cliente para o servidor. Já o sistema embarcado é uma via bidirecional, por isso o uso de MQTT. Os blocos com asterisco (`*`) são aplicações a serem desenvolvidas ao longo do projeto.
+O acesso é padronizado para microprocessados (aplicações Web) e microcontrolados, baseado em REST API + JSON, uma vez que o sentido das mensagens é, basicamente, do cliente para o servidor. Os blocos com asterisco (`*`) são aplicações a serem desenvolvidas ao longo do projeto:
+
+- Cadastro: cadastro e manutenção de conta de usuário;
+- Banco: operador financeiro, o banco do sistem econômico.
 
 ```mermaid
 flowchart LR
     WebApp([Web App])
     Embarcado([Embarcado])
+
     subgraph Nuvem
         subgraph Web
             HTTPS(HTTPS)
-            WS(WebSocket)
             Cadastro(Cadastro*)
-            Banco0(Banco*)
-        end
-        subgraph MQTT
-            Broker(Broker)
-            Banco1(Banco*)
+            Banco(Banco*)
         end
         BD[(BD)]
     end
 
     WebApp --- HTTPS
     HTTPS --- Cadastro
-    HTTPS --- Banco0
-    Banco0 --- BD
+    HTTPS --- Banco
+    Banco --- BD
     Cadastro --- BD
 
     Embarcado --- HTTPS
-    HTTPS --- WS
-    WS --- Broker
-    Broker --- Banco1
-    Banco1 --- BD
-
-    linkStyle 0,1,2,3,4 stroke:lightgreen
-    linkStyle 5,6,7,8,9 stroke:lightyellow
 ```
