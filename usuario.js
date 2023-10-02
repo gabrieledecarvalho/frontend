@@ -101,7 +101,7 @@ async function comprarProduto (id) {
 
 async function finalizarCompra () {
   try {
-    const dataAtual = new Date() 
+    const dataAtual = new Date()
     const dataFormatada = formatarData(dataAtual)
     await cliente.query("insert into despesas(jogador_id,produtoId,valor,data) VALUES((SELECT id FROM jogador WHERE email = '" + email + "'and senha = '" + senha + "')," + produtoId + ',' + valorProduto + ",'" + dataFormatada + "');")
     await cliente.query('update estoque set quantidade = quantidade - 1 WHERE produtoId =' + produtoId + ' ;')
@@ -168,7 +168,7 @@ function escolha () {
       cliente.end()
     } else {
       rl.close()
-      cliente.end() 
+      cliente.end()
     }
   })
 }
