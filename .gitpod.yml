@@ -1,13 +1,7 @@
 tasks:
-  - name: eslint
-    init: npm install eslint --save-dev
   - name: servidor
-    init: npm install
-    command: node index.js
-
-ports:
-  - port: 3000
-    onOpen: open-browser
+    init: npm install --include-dev
+    command: node servidor.js
 
 vscode:
   extensions:
