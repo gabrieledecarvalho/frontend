@@ -1,6 +1,6 @@
 ### /extrato: 200 OK
 
-GET http://localhost:3000/extrato HTTP/1.1
+GET http://localhost:3000/api/v1/extrato HTTP/1.1
 content-type: application/json
 
 {
@@ -10,7 +10,7 @@ content-type: application/json
 
 ### /extrato: 400 Bad Request
 
-GET http://localhost:3000/extrato HTTP/1.1
+GET http://localhost:3000/api/v1/extrato HTTP/1.1
 content-type: application/json
 
 {
@@ -20,7 +20,7 @@ content-type: application/json
 
 ### /extrato: 401 Unathorized
 
-GET http://localhost:3000/extrato HTTP/1.1
+GET http://localhost:3000/api/v1/extrato HTTP/1.1
 content-type: application/json
 
 {
