@@ -1,0 +1,31 @@
+### /extrato: 200 OK
+
+GET http://localhost:3000/extrato HTTP/1.1
+content-type: application/json
+
+{
+  "id": "0001",
+  "senha": "1234"
+}
+
+### /extrato: 400 Bad Request
+
+GET http://localhost:3000/extrato HTTP/1.1
+content-type: application/json
+
+{
+  "apelido": "boi",
+  "senha": "1234"
+}
+
+### /extrato: 401 Unathorized
+
+GET http://localhost:3000/extrato HTTP/1.1
+content-type: application/json
+
+{
+  "id": "0001",
+  "senha": "123456"
+}
+
+###
