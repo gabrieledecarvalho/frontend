@@ -57,7 +57,7 @@ const creditoEsquema = Joi.object({
   valor: Joi.number().integer().min(1)
 })
 
-app.get('/api/v1/credito', async (req, res) => {
+app.post('/api/v1/credito', async (req, res) => {
   const validationResult = creditoEsquema.validate(req.body)
   if (validationResult.error) {
     res.status(400).send(validationResult.error.details[0].message)

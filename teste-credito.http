@@ -1,6 +1,6 @@
 ### Teste local: /credito, 200 OK
 
-GET http://localhost:3000/api/v1/credito HTTP/1.1
+POST http://localhost:3000/api/v1/credito HTTP/1.1
 content-type: application/json
 
 {
@@ -12,7 +12,7 @@ content-type: application/json
 
 ### Teste remoto: /credito, 200 OK
 
-GET https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
 content-type: application/json
 
 {
@@ -24,7 +24,7 @@ content-type: application/json
 
 ### Teste local: /credito, 400 Bad Request
 
-GET http://localhost:3000/api/v1/credito HTTP/1.1
+POST http://localhost:3000/api/v1/credito HTTP/1.1
 content-type: application/json
 
 {
@@ -36,7 +36,7 @@ content-type: application/json
 
 ### Teste remoto: /credito, 400 Bad Request
 
-GET https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
 content-type: application/json
 
 {
@@ -48,7 +48,7 @@ content-type: application/json
 
 ### Teste local: /credito, 401 Unathorized
 
-GET http://localhost:3000/api/v1/credito HTTP/1.1
+POST http://localhost:3000/api/v1/credito HTTP/1.1
 content-type: application/json
 
 {
@@ -60,7 +60,7 @@ content-type: application/json
 
 ### Teste remoto: /credito, 401 Unathorized
 
-GET https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/credito HTTP/2.0
 content-type: application/json
 
 {
