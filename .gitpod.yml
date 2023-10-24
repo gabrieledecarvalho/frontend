@@ -1,6 +1,4 @@
 tasks:
-  - name: nodemon
-    init: npm install nodemon --save-dev -g 
   - name: eslint
     init: npm install eslint --save-dev
   - name: deps
@@ -10,4 +8,3 @@ tasks:
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
-    - humao.rest-client

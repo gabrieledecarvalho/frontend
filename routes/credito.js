@@ -4,12 +4,12 @@ const Joi = require('joi')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 const { Pool } = require('pg')
-const pool = new Pool({});
+const pool = new Pool();
 
 const creditoEsquema = Joi.object({
   id: Joi.number().integer().min(0).required(),
   senha: Joi.number().integer().min(0).required(),
-  jogo: Joi.number().integer().min(1).required(),
+  jogo: Joi.number().integer().min(0).required(),
   valor: Joi.number().integer().min(1).required()
 })
 

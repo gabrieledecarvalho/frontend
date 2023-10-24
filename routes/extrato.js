@@ -4,8 +4,7 @@ const Joi = require('joi')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 const { Pool } = require('pg')
-const pool = new Pool({});
-
+const pool = new Pool();
 
 const extratoEsquema = Joi.object({
   id: Joi.number().integer().min(0).required(),
