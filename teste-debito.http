@@ -1,0 +1,65 @@
+### Teste local: /debito, 200 OK
+
+POST http://localhost:3000/api/v1/debito HTTP/1.1
+content-type: application/json
+
+{
+  "id": "0",
+  "senha": "1234",
+  "produto": "1",
+  "valor": "3"
+}
+
+### Teste remoto: /debito, 200 OK
+
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/debito HTTP/2.0
+content-type: application/json
+
+{
+  "id": "0001",
+  "senha": "1234"
+}
+
+### Teste local: /debito, 400 Bad Request
+
+POST http://localhost:3000/api/v1/debito HTTP/1.1
+content-type: application/json
+
+{
+  "apelido": "boi",
+  "senha": "1234",
+  "produto": "1",
+  "valor": "33"
+}
+
+### Teste remoto: /debito, 400 Bad Request
+
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/debito HTTP/2.0
+content-type: application/json
+
+{
+  "apelido": "boi",
+  "senha": "1234"
+}
+
+### Teste local: /debito, 401 Unathorized
+
+POST http://localhost:3000/api/v1/debito HTTP/1.1
+content-type: application/json
+
+{
+  "id": "0001",
+  "senha": "123456"
+}
+
+### Teste remoto: /debito, 401 Unathorized
+
+POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/debito HTTP/2.0
+content-type: application/json
+
+{
+  "id": "0001",
+  "senha": "123456"
+}
+
+###

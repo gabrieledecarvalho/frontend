@@ -4,11 +4,18 @@ const Joi = require('joi')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 const { Pool } = require('pg')
-const pool = new Pool()
+const pool = new Pool({
+  user: "postgres",
+  password: "1308",
+  host: "127.0.0.1",
+  port: 5433,
+  database: "feira"
+});
+
 
 const extratoEsquema = Joi.object({
-  id: Joi.number().integer().min(1),
-  senha: Joi.number().integer().min(0)
+  id: Joi.number().integer().min(0).required(),
+  senha: Joi.number().integer().min(0).required()
 })
 
 router.get('/extrato', async (req, res) => {
