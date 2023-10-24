@@ -3,8 +3,7 @@ const router = express.Router()
 const Joi = require('joi')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
-const { Pool } = require('pg')
-const pool = new Pool();
+const db = require('../db.js')
 
 const debitoEsquema = Joi.object({
   id: Joi.number().integer().min(0).required(),
@@ -19,19 +18,22 @@ router.post('/debito', async (req, res) => {
     res.status(400).send(validationResult.error.details[0].message);
     return;
   }
+  
   try {
-    const auth = await pool.query('SELECT id FROM jogadores WHERE id = $1 AND senha = $2', [req.body.id, req.body.senha])
+    const auth = await db.query('SELECT id FROM jogadores WHERE id = $1 AND senha = $2', [req.body.id, req.body.senha])
     if (auth.rowCount === 0) {
       res.sendStatus(401)
       return
     }
 
-    let receitas = await pool.query('SELECT COALESCE(SUM(valor), 0) FROM receitas WHERE jogador_id = (SELECT id FROM jogadores WHERE id = $1 AND senha = $2)', [req.body.id, req.body.senha]);
+    let receitas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM receitas WHERE jogador_id = $1', [req.body.id]);
     receitas = parseInt(receitas.rows[0].sum);
-    let despesas = await pool.query('SELECT COALESCE(SUM(valor), 0) FROM despesas WHERE jogador_id = (SELECT id FROM jogadores WHERE id = $1 AND senha = $2)', [req.body.id, req.body.senha]);
+
+    let despesas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM despesas WHERE jogador_id = $1', [req.body.id]);
     despesas = parseInt(despesas.rows[0].sum);
-    let produto = await pool.query('SELECT * FROM produtos where id = $1', [req.body.produto]);
-    let valorProduto = await pool.query("select valor from produtos where id =" + req.body.produto);
+
+    let produto = await db.query('SELECT * FROM produtos WHERE id = $1', [req.body.produto]);
+    let valorProduto = await db.query('SELECT valor FROM produtos WHERE id = $1', [req.body.produto]);
     valorProduto = parseInt(valorProduto.rows[0].valor);
 
     if (produto.rowCount === 0) {
@@ -49,8 +51,8 @@ router.post('/debito', async (req, res) => {
       return
     }
 
-    await pool.query('insert into despesas(jogador_id,produto_id,valor,data) values((select id from jogadores where id = $1 and senha = $2), $3, $4, NOW())', [req.body.id, req.body.senha, req.body.produto, req.body.valor]);
-    await pool.query('update estoque set quantidade = quantidade - 1 where produto_id = $1;', [req.body.produto])
+    await db.query('INSERT INTO despesas(jogador_id, produto_id, valor, data) VALUES ($1, $2, $3, NOW())', [req.body.id, req.body.produto, req.body.valor]);
+    await db.query('UPDATE estoque SET quantidade = quantidade - 1 WHERE produto_id = $1;', [req.body.produto])
     res.status(200).send('OK')
 
   } catch (error) {

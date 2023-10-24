@@ -3,8 +3,7 @@ const router = express.Router()
 const Joi = require('joi')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
-const { Pool } = require('pg')
-const pool = new Pool();
+const db = require('../db.js')
 
 const creditoEsquema = Joi.object({
   id: Joi.number().integer().min(0).required(),
@@ -21,13 +20,13 @@ router.post('/credito', async (req, res) => {
   }
 
   try {
-    const auth = await pool.query('SELECT id FROM jogadores WHERE id = $1 AND senha = $2', [req.body.id, req.body.senha])
+    const auth = await db.query('SELECT id FROM jogadores WHERE id = $1 AND senha = $2', [req.body.id, req.body.senha])
     if (auth.rowCount === 0) {
       res.sendStatus(401)
       return
     }
 
-    const credito = await pool.query('INSERT INTO receitas (jogador_id, jogo_id, valor, data) values ($1, $2, $3, NOW())', [req.body.id, req.body.jogo, req.body.valor])
+    const credito = await db.query('INSERT INTO receitas (jogador_id, jogo_id, valor, data) values ($1, $2, $3, NOW())', [req.body.id, req.body.jogo, req.body.valor])
 
     res.json(credito)
   } catch (err) {
