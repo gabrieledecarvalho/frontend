@@ -16,8 +16,10 @@ POST https://feira-de-jogos.sj.ifsc.edu.br/api/v1/debito HTTP/2.0
 content-type: application/json
 
 {
-  "id": "0001",
-  "senha": "1234"
+  "id": "0",
+  "senha": "1234",
+  "produto": "1",
+  "valor": "3"
 }
 
 ### Teste local: /debito, 400 Bad Request
