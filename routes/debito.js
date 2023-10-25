@@ -10,7 +10,7 @@ const debitoEsquema = Joi.object({
   senha: Joi.number().integer().min(0).required(),
   produto: Joi.number().integer().min(0).required(),
   valor: Joi.number().integer().min(1).required(),
-  maquina: Joi.number().integer.min(0).required()
+  maquina: Joi.number().integer().min(0).required()
 })
 
 router.post('/debito', async (req, res) => {
