@@ -32,7 +32,7 @@ router.post('/debito', async (req, res) => {
     let despesas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM despesas WHERE jogador_id = $1', [req.body.id])
     despesas = parseInt(despesas.rows[0].sum)
 
-    const produto = await db.query('SELECT * FROM produtos WHERE id = $1 AND EXISTS (SELECT 1 FROM estoque WHERE maquina_id = $2 AND produto_id = produtos.id AND quantidade > 0);', [req.body.produto])
+    const produto = await db.query('SELECT * FROM produtos WHERE id = $1 AND EXISTS (SELECT 1 FROM estoque WHERE maquina_id = $2 AND produto_id = produtos.id AND quantidade > 0);', [req.body.produto, req.body.maquina])
     if (produto.rowCount === 0) {
       res.sendStatus(400)
       return
