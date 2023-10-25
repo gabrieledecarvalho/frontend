@@ -9,16 +9,16 @@ const debitoEsquema = Joi.object({
   id: Joi.number().integer().min(0).required(),
   senha: Joi.number().integer().min(0).required(),
   produto: Joi.number().integer().min(0).required(),
-  valor: Joi.number().integer().min(1).required()
+  valor: Joi.number().integer().min(1).required(),
+  maquina: Joi.number().integer.min(0).required()
 })
 
 router.post('/debito', async (req, res) => {
-  const validationResult = debitoEsquema.validate(req.body);
+  const validationResult = debitoEsquema.validate(req.body)
   if (validationResult.error) {
-    res.status(400).send(validationResult.error.details[0].message);
-    return;
+    res.status(400).send(validationResult.error.details[0].message)
+    return
   }
-  
   try {
     const auth = await db.query('SELECT id FROM jogadores WHERE id = $1 AND senha = $2', [req.body.id, req.body.senha])
     if (auth.rowCount === 0) {
@@ -26,39 +26,29 @@ router.post('/debito', async (req, res) => {
       return
     }
 
-    let receitas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM receitas WHERE jogador_id = $1', [req.body.id]);
-    receitas = parseInt(receitas.rows[0].sum);
+    let receitas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM receitas WHERE jogador_id = $1', [req.body.id])
+    receitas = parseInt(receitas.rows[0].sum)
 
-    let despesas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM despesas WHERE jogador_id = $1', [req.body.id]);
-    despesas = parseInt(despesas.rows[0].sum);
+    let despesas = await db.query('SELECT COALESCE(SUM(valor), 0) FROM despesas WHERE jogador_id = $1', [req.body.id])
+    despesas = parseInt(despesas.rows[0].sum)
 
-    let produto = await db.query('SELECT * FROM produtos WHERE id = $1', [req.body.produto]);
-    let valorProduto = await db.query('SELECT valor FROM produtos WHERE id = $1', [req.body.produto]);
-    valorProduto = parseInt(valorProduto.rows[0].valor);
-
+    const produto = await db.query('SELECT * FROM produtos WHERE id = $1 AND EXISTS (SELECT 1 FROM estoque WHERE maquina_id = $2 AND produto_id = produtos.id AND quantidade > 0);', [req.body.produto])
     if (produto.rowCount === 0) {
       res.sendStatus(400)
       return
     }
-
-    if (req.body.valor != valorProduto) {
-      res.sendStatus(400)
-      return
-    }
-
     if ((receitas - despesas) < req.body.valor) {
       res.sendStatus(403)
       return
     }
 
-    await db.query('INSERT INTO despesas(jogador_id, produto_id, valor, data) VALUES ($1, $2, $3, NOW())', [req.body.id, req.body.produto, req.body.valor]);
+    await db.query('INSERT INTO despesas(jogador_id, produto_id, valor, data) VALUES ($1, $2, $3, NOW())', [req.body.id, req.body.produto, req.body.valor])
     await db.query('UPDATE estoque SET quantidade = quantidade - 1 WHERE produto_id = $1;', [req.body.produto])
-    res.status(200).send('OK')
 
+    res.status(200).send('OK')
   } catch (error) {
     res.sendStatus(500)
   }
-
 })
 
 module.exports = router
