@@ -27,7 +27,7 @@ router.post('/postEstoque', async (req, res) => {
     }
     const produto = await db.query('SELECT * from produtos WHERE id = $1', [req.body.produto])
     if (produto.rowCount === 0) {
-      res.sendStatus(400)
+      res.sendStatus(403)
       return
     }
     const estoque = await db.query('SELECT * from estoque WHERE maquina_id = $1 AND produto_id = $2', [req.body.maquina, req.body.produto])
