@@ -24,7 +24,8 @@ router.get('/getEstoque', async (req, res) => {
       return
     }
 
-    const estoque = await db.query('SELECT * from estoque WHERE maquina_id = $1', [req.body.maquina])
+    let estoque = await db.query('SELECT * from estoque WHERE maquina_id = $1', [req.body.maquina])
+    estoque = { estoque: estoque.rows }
 
     res.json(estoque)
   } catch (err) {
