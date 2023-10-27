@@ -24,7 +24,7 @@ router.get('/estoque', async (req, res) => {
       return
     }
 
-    let estoque = await db.query('SELECT * from estoque WHERE maquina_id = $1', [req.body.maquina])
+    let estoque = await db.query('SELECT produtos.id, produtos.descricao, estoque.quantidade FROM estoque INNER JOIN produtos ON estoque.produto_id = produtos.id WHERE maquina_id = $1', [req.body.maquina])
     estoque = { estoque: estoque.rows }
 
     res.json(estoque)
