@@ -9,7 +9,7 @@ loginForm.addEventListener('submit', function (event) {
   const username = usernameInput.value
   const password = passwordInput.value
 
-  axios.post('https://feira-de-jogos.sj.ifsc.edu.br/api/v1/extrato', {
+  axios.post('/api/v1/extrato', {
     id: username,
     senha: password
   })
