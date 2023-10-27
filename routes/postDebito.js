@@ -37,6 +37,7 @@ router.post('/debito', async (req, res) => {
       res.sendStatus(400)
       return
     }
+
     if ((receitas - despesas) < req.body.valor) {
       res.sendStatus(403)
       return
@@ -44,8 +45,7 @@ router.post('/debito', async (req, res) => {
 
     await db.query('INSERT INTO despesas(jogador_id, produto_id, valor, data) VALUES ($1, $2, $3, NOW())', [req.body.id, req.body.produto, req.body.valor])
     await db.query('UPDATE estoque SET quantidade = quantidade - 1 WHERE produto_id = $1;', [req.body.produto])
-
-    res.status(200).send('OK')
+    res.sendStatus(200)
   } catch (error) {
     res.sendStatus(500)
   }

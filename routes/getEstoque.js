@@ -5,13 +5,13 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 const db = require('../db.js')
 
-const creditoEsquema = Joi.object({
+const estoqueEsquema = Joi.object({
   maquina: Joi.number().integer().min(0).required(),
   senha: Joi.number().integer().min(0).required()
 })
 
-router.get('/getEstoque', async (req, res) => {
-  const validationResult = creditoEsquema.validate(req.body)
+router.get('/estoque', async (req, res) => {
+  const validationResult = estoqueEsquema.validate(req.body)
   if (validationResult.error) {
     res.status(400).send(validationResult.error.details[0].message)
     return
