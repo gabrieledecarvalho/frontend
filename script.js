@@ -15,6 +15,9 @@ loginForm.addEventListener('submit', function (event) {
   })
     .then(response => {
       console.log('Resposta do servidor:', response.data)
+      if (response.data === 401) {
+        console.log('erro')
+      }
     })
     .catch(error => {
       console.error('Erro na solicitação:', error)
