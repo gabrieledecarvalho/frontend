@@ -10,15 +10,20 @@
 
 <body>
     <div class="container">
-        <h1>Login Bancário</h1>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Usuário (números apenas)" required inputmode="numeric"
+        <div class="login-box">
+            <img src="./img/Banco-Imagem.png" alt="Banco Logo">
+            <h1>Entre na sua conta</h1>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Usuário" required inputmode="numeric"
                 pattern="[0-9]*">
-            <input type="password" id="password" placeholder="Senha (números apenas)" required inputmode="numeric"
+            <input type="password" id="password" placeholder="Senha" required inputmode="numeric"
                 pattern="[0-9]*">
-            <button type="submit">Enviar</button>
-        </form>
+                <button type="submit">Entrar</button>
+            </form>
+            <a href="#">Ainda não tem conta? Crie a sua!</a>
+        </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./script.js"></script>
 </body>

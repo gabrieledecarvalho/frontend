@@ -1,27 +1,66 @@
+/* Adicione este CSS em seu arquivo "style.css" */
+
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-box {
+    background: #fff;
     border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    width: 350px;
+}
+
+img {
+    max-width: 100px;
+    margin: 0 auto;
+    display: block;
+}
+
+h1 {
+    color: #3483FA;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 input {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 button {
-    background-color: #0074cc;
+    background-color: #3483FA;
     color: #fff;
+    width: 100%;
+    padding: 10px;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 3px;
+    margin-top: 10px;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #3483FA;
+    display: block;
+    margin-top: 10px;
 }
