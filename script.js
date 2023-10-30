@@ -2,6 +2,7 @@
 const loginForm = document.getElementById('loginForm')
 const usernameInput = document.getElementById('username')
 const passwordInput = document.getElementById('password')
+const errorMessage = document.getElementById('error-message')
 
 loginForm.addEventListener('submit', function (event) {
   event.preventDefault()
@@ -18,7 +19,7 @@ loginForm.addEventListener('submit', function (event) {
     })
     .catch(error => {
       if (error.response && error.response.status === 401) {
-        alert('Erro 401') // Exibe um alert quando o status da resposta for 401.
+        errorMessage.textContent = 'O usuário ou a senha inserida está incorreta.'
       } else {
         console.error('Erro na solicitação:', error)
       }
