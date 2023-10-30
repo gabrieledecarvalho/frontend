@@ -16,10 +16,11 @@ loginForm.addEventListener('submit', function (event) {
   })
     .then(response => {
       console.log('Resposta do servidor:', response.data)
+      errorMessage.textContent = ''
     })
     .catch(error => {
       if (error.response && error.response.status === 401) {
-        errorMessage.textContent = 'O usuário ou a senha inserida está incorreta.'
+        errorMessage.textContent = 'O usuário ou a senha estam incorretos'
       } else {
         console.error('Erro na solicitação:', error)
       }
