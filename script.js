@@ -15,11 +15,12 @@ loginForm.addEventListener('submit', function (event) {
   })
     .then(response => {
       console.log('Resposta do servidor:', response.data)
-      if (response.status === 401) {
-        alert('Erro 401') // Exibe um alert quando o status da resposta for 401.
-      }
     })
     .catch(error => {
-      console.error('Erro na solicitação:', error)
+      if (error.response && error.response.status === 401) {
+        alert('Erro 401') // Exibe um alert quando o status da resposta for 401.
+      } else {
+        console.error('Erro na solicitação:', error)
+      }
     })
 })
