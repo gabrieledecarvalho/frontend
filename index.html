@@ -2,21 +2,32 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banco: Login</title>
-  <script src="https://accounts.google.com/gsi/client" async></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Bancário</title>
+    <link rel="shortcut icon" href="./img/Banco-Imagem.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 
 <body>
-  <div id="g_id_onload" data-client_id="179251437248-pnkivbritoue59pbodppmifihnqe2tpt.apps.googleusercontent.com"
-    data-context="signin" data-ux_mode="popup" data-login_uri="https://feira-de-jogos.sj.ifsc.edu.br/api/v1/extrato"
-    data-nonce="" data-itp_support="true">
-  </div>
+    <div class="container">
+          <div class="login-box">
+             <img src="./img/Banco-Imagem.png" alt="Banco Logo">
+             <h1>Entre ou crie sua conta</h1>
+             <div id="g_id_onload" data-client_id="179251437248-pnkivbritoue59pbodppmifihnqe2tpt.apps.googleusercontent.com"
+             data-context="signin" data-ux_mode="popup" data-login_uri="https://feira-de-jogos.sj.ifsc.edu.br/api/v1/extrato"
+              data-nonce="" data-itp_support="true">
+          </div>
 
-  <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-text="signin_with"
-    data-size="large" data-logo_alignment="left">
-  </div>
+          <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-text="signin_with"
+            data-size="large" data-logo_alignment="left">
+          </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
