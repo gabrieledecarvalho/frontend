@@ -1,3 +1,0 @@
-tasks:
-  - name: eslint
-    init: npm install --include-dev
