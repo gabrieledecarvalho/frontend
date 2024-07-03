@@ -1,9 +1,9 @@
-const cacheName = "Ifsc-Cassino_Feira_de_Jogos-1.0";
+const cacheName = "Ifsc-Feira De Jogos-0.4";
 const contentToCache = [
-    "Build/CassinoTeste.loader.js",
-    "Build/CassinoTeste.framework.js.br",
-    "Build/CassinoTeste.data.br",
-    "Build/CassinoTeste.wasm.br",
+    "Build/FeiraDejogos0.4.loader.js",
+    "Build/FeiraDejogos0.4.framework.js.gz",
+    "Build/FeiraDejogos0.4.data.gz",
+    "Build/FeiraDejogos0.4.wasm.gz",
     "TemplateData/style.css"
 
 ];

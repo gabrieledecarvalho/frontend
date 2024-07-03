@@ -1,11 +1,11 @@
 {
-    "name": "Cassino_Feira_de_Jogos",
-    "short_name": "Cassino_Feira_de_Jogos",
+    "name": "Feira De Jogos",
+    "short_name": "Feira De Jogos",
     "start_url": "index.html",
     "display": "fullscreen",
     "background_color": "#18201D",
     "theme_color": "#000",
-    "description": "Test for WebGL",
+    "description": "Versao com Pix e Extrato",
     "icons": [{
       "src": "TemplateData/icons/unity-logo-dark.png",
       "sizes": "144x144",
