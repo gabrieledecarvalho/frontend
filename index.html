@@ -21,9 +21,9 @@
     </div>
     <script>
       window.addEventListener("load", function () {
-      //  if ("serviceWorker" in navigator) {
-      //    navigator.serviceWorker.register("ServiceWorker.js");
-      //  }
+        // if ("serviceWorker" in navigator) {
+        //  navigator.serviceWorker.register("ServiceWorker.js");
+        // }
       });
 
       var container = document.querySelector("#unity-container");
@@ -57,15 +57,15 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/FeiraDejogos0.11.loader.js";
+      var loaderUrl = buildUrl + "/FeiraDejogos1.0.loader.js";
       var config = {
-        dataUrl: buildUrl + "/FeiraDejogos0.11.data.gz",
-        frameworkUrl: buildUrl + "/FeiraDejogos0.11.framework.js.gz",
-        codeUrl: buildUrl + "/FeiraDejogos0.11.wasm.gz",
+        dataUrl: buildUrl + "/FeiraDejogos1.0.data.gz",
+        frameworkUrl: buildUrl + "/FeiraDejogos1.0.framework.js.gz",
+        codeUrl: buildUrl + "/FeiraDejogos1.0.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Ifsc",
         productName: "Feira De Jogos",
-        productVersion: "0.11",
+        productVersion: "1",
         showBanner: unityShowBanner,
       };
 
