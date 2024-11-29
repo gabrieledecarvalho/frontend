@@ -1,0 +1,1 @@
+Capetalismo é um jogo rogue like de ação cooperativa, onde os jogadores que são dois demônios devem escapar do inferno passando através dos sete círculos. Para isso, terão à sua disposição diversas armas e relíquias. Nesses círculos, será necessária uma colaboração entre seu parceiro para enfim matar lúcifer e poder escapar. Conseguiria você chegar ao final desse inferno?
