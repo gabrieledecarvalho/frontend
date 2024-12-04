@@ -20,11 +20,15 @@
       <div id="unity-warning"> </div>
     </div>
     <script>
-      window.addEventListener("load", function () {
-        // if ("serviceWorker" in navigator) {
-        //  navigator.serviceWorker.register("ServiceWorker.js");
-        // }
-      });
+      //  Registrando o Service Worker e verificando se ele foi registrado da forma correta
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./ServiceWorker.js")
+          .then((reg) => console.info("Service worker registered: ", reg))
+          .catch((err) =>
+            console.error("Error registering service worker: ", err)
+          )
+      }
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
